@@ -1,3 +1,10 @@
+#
+# Nitro FPGA build system: Core magic include
+#
+# Copyright (C) 2020 Sylvain Munaut
+# SPDX-License-Identifier: BSD-3-Clause
+#
+
 # Export core directory
 penultimateword = $(wordlist $(words $1),$(words $1), x $1)
 CORE_$(CORE)_DIR := $(dir $(call penultimateword,$(MAKEFILE_LIST)))

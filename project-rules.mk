@@ -1,5 +1,8 @@
 #
-# project-rules.mk
+# Nitro FPGA build system: Project rules file
+#
+# Copyright (C) 2020 Sylvain Munaut
+# SPDX-License-Identifier: BSD-3-Clause
 #
 
 # Default tools
