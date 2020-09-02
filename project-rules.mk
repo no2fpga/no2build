@@ -92,7 +92,7 @@ $(BUILD_TMP)/$(PROJ).pnr.rpt $(BUILD_TMP)/$(PROJ).asc: $(BUILD_TMP)/$(PROJ).json
 		-l $(BUILD_TMP)/$(PROJ).pnr.rpt \
 		--json $(BUILD_TMP)/$(PROJ).json \
 		--pcf $(PIN_DEF) \
-		--asc $@ 
+		--asc $@
 
 %.bin: %.asc
 	$(ICEPACK) -s $< $@
