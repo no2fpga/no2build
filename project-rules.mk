@@ -121,7 +121,7 @@ sudo-prog: $(BUILD_TMP)/$(PROJ).bin
 
 dfuprog: $(BUILD_TMP)/$(PROJ).bin
 ifeq ($(DFU_SERIAL),)
-	@echo "[!] DFU_SERIAL not defined"
+	$(DFU_UTIL) -e -a 0 -D $<
 else
 	$(DFU_UTIL) -e -S $(DFU_SERIAL) -a 0 -D $<
 endif
