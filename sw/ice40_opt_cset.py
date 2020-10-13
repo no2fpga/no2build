@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-
-"""
-Attempts to optimizat Control Sets and remove those that have very
-low usage
-"""
+#
+# Attempts to optimizat Control Sets and remove those that have very
+# low usage
+#
+# Copyright (C) 2020 Sylvain Munaut
+# SPDX-License-Identifier: MIT
+#
 
 from collections import namedtuple
 

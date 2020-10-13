@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+#
+# Show usage post-pack
+#
+# Copyright (C) 2020 Sylvain Munaut
+# SPDX-License-Identifier: MIT
+#
 
 CELLS = {
 	'ICESTORM_LC':    (   'LC', 5),

@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-
-"""
-Each LUT that goes to several FF can be duplicated to gain some LCs.
-"""
+#
+# Each LUT that goes to several FF can be duplicated to gain some LCs.
+#
+# Copyright (C) 2020 Sylvain Munaut
+# SPDX-License-Identifier: MIT
+#
 
 
 def run_opt(ctx):
