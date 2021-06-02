@@ -53,7 +53,7 @@ CORE_SIM_INCLUDES   := $(addsuffix /sim/, $(addprefix -I$(NO2CORES_DIR)/, $(CORE
 
 # Simulation
 $(BUILD_TMP)/%_tb: sim/%_tb.v $(ICE40_LIBS) $(CORE_ALL_PREREQ) $(CORE_ALL_RTL_SRCS) $(CORE_ALL_SIM_SRCS)
-	iverilog -Wall -Wno-portbind -Wno-timescale -DSIM=1 -o $@ \
+	$(IVERILOG) -Wall -Wno-portbind -Wno-timescale -DSIM=1 -DNO_ICE40_DEFAULT_ASSIGNMENTS -o $@ \
 		$(CORE_SYNTH_INCLUDES) $(CORE_SIM_INCLUDES) \
 		$(addprefix -l, $(ICE40_LIBS) $(CORE_ALL_RTL_SRCS) $(CORE_ALL_SIM_SRCS)) \
 		$<

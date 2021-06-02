@@ -100,7 +100,7 @@ $(BUILD_TMP)/$(PROJ).pnr.rpt $(BUILD_TMP)/$(PROJ).asc: $(BUILD_TMP)/$(PROJ).json
 
 # Simulation
 $(BUILD_TMP)/%_tb: sim/%_tb.v $(ICE40_LIBS) $(PROJ_ALL_PREREQ) $(PROJ_ALL_RTL_SRCS) $(PROJ_ALL_SIM_SRCS)
-	$(IVERILOG) -Wall -Wno-portbind -Wno-timescale -DSIM=1 -D$(BOARD_DEFINE)=1 -o $@ \
+	$(IVERILOG) -Wall -Wno-portbind -Wno-timescale -DSIM=1 -DNO_ICE40_DEFAULT_ASSIGNMENTS -D$(BOARD_DEFINE)=1 -o $@ \
 		$(PROJ_SYNTH_INCLUDES) $(PROJ_SIM_INCLUDES) \
 		$(addprefix -l, $(ICE40_LIBS) $(PROJ_ALL_RTL_SRCS) $(PROJ_ALL_SIM_SRCS)) \
 		$<
