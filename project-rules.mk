@@ -57,6 +57,7 @@ include $(BUILD_TMP)/proj-deps.mk
 
 # Make all sources absolute
 PROJ_RTL_SRCS := $(abspath $(PROJ_RTL_SRCS))
+PROJ_SIM_SRCS := $(abspath $(PROJ_SIM_SRCS))
 PROJ_TOP_SRC  := $(abspath $(PROJ_TOP_SRC))
 
 # Board config
