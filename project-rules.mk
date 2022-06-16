@@ -47,7 +47,9 @@ $(foreach core_def, $(wildcard $(NO2CORES_DIR)/*/no2core.mk), $(eval include $(c
 # Resolve dependency tree for project and collect sources
 $(BUILD_TMP)/proj-deps.mk: Makefile $(BUILD_TMP) $(addprefix $(BUILD_TMP)/deps-core-,$(PROJ_DEPS))
 	@echo "SELF_DIR := \$$(dir \$$(lastword \$$(MAKEFILE_LIST)))" > $@
-	@echo "include \$$(SELF_DIR)deps-core-*" >> $@
+	@if [ "$(PROJ_DEPS)" != "" ]; then \
+		echo "include \$$(SELF_DIR)deps-core-*" >> $@; \
+	fi
 	@echo "PROJ_ALL_DEPS := \$$(DEPS_SOLVE_TMP)" >> $@
 	@echo "PROJ_ALL_RTL_SRCS := \$$(RTL_SRCS_SOLVE_TMP)" >> $@
 	@echo "PROJ_ALL_SIM_SRCS := \$$(SIM_SRCS_SOLVE_TMP)" >> $@
