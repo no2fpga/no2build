@@ -30,7 +30,7 @@ endif
 BUILD_TMP := $(abspath build-tmp)
 
 $(BUILD_TMP):
-	mkdir -p $(BUILD_TMP)
+	@mkdir -p $(BUILD_TMP)
 
 # Discover all cores
 $(foreach core_def, $(wildcard $(NO2CORES_DIR)/*/no2core.mk), $(eval include $(core_def)))
