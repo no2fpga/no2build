@@ -12,6 +12,7 @@ YOSYS_SYNTH_ARGS ?= -dffe_min_ce_use 4
 NEXTPNR ?= nextpnr-ice40
 NEXTPNR_ARGS ?= --freq 50
 ICEPACK ?= icepack
+ICEPACK_ARGS ?= -s
 ICEPROG ?= iceprog
 IVERILOG ?= iverilog
 DFU_UTIL ?= dfu-util
@@ -98,7 +99,7 @@ $(BUILD_TMP)/$(PROJ).pnr.rpt $(BUILD_TMP)/$(PROJ).asc: $(BUILD_TMP)/$(PROJ).json
 		--asc $@
 
 %.bin: %.asc
-	$(ICEPACK) -s $< $@
+	$(ICEPACK) $(ICEPACK_ARGS) $< $@
 
 
 # Simulation
