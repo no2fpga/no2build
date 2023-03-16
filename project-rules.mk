@@ -36,6 +36,10 @@ ifeq ($(origin NO2CORES_DIR), undefined)
 NO2CORES_DIR := $(abspath $(NO2BUILD_DIR)/../cores)
 endif
 
+ifeq ($(origin PROJ_DEPS), undefined)
+PROJ_DEPS := ""
+endif
+
 # Temporary build-directory
 BUILD_TMP := $(abspath build-tmp)
 
@@ -56,7 +60,9 @@ $(BUILD_TMP)/proj-deps.mk: Makefile $(BUILD_TMP) $(addprefix $(BUILD_TMP)/deps-c
 	@echo "PROJ_ALL_SIM_SRCS := \$$(SIM_SRCS_SOLVE_TMP)" >> $@
 	@echo "PROJ_ALL_PREREQ := \$$(PREREQ_SOLVE_TMP)" >> $@
 
+ifneq ($(PROJ_DEPS), "")
 include $(BUILD_TMP)/proj-deps.mk
+endif
 
 # Make all sources absolute
 PROJ_RTL_SRCS := $(abspath $(PROJ_RTL_SRCS))
@@ -81,7 +87,7 @@ PROJ_SIM_INCLUDES   := -I$(abspath sim/) $(addsuffix /sim/, $(addprefix -I$(NO2C
 
 # Synthesis & Place-n-route rules
 
-$(BUILD_TMP)/$(PROJ).ys: $(PROJ_TOP_SRC) $(PROJ_ALL_RTL_SRCS)
+$(BUILD_TMP)/$(PROJ).ys: $(BUILD_TMP) $(PROJ_TOP_SRC) $(PROJ_ALL_RTL_SRCS)
 	@echo "read_verilog $(YOSYS_READ_ARGS) $(PROJ_SYNTH_INCLUDES) $(PROJ_TOP_SRC) $(PROJ_ALL_RTL_SRCS)" > $@
 	@echo "synth_ice40 $(YOSYS_SYNTH_ARGS) -top $(PROJ_TOP_MOD) -json $(PROJ).json" >> $@
 
@@ -114,7 +120,7 @@ $(BUILD_TMP)/%_tb: sim/%_tb.v $(ICE40_LIBS) $(PROJ_ALL_PREREQ) $(PROJ_ALL_RTL_SR
 
 synth: $(BUILD_TMP)/$(PROJ).bin
 
-sim: $(addprefix $(BUILD_TMP)/, $(PROJ_TESTBENCHES))
+sim: $(BUILD_TMP) $(addprefix $(BUILD_TMP)/, $(PROJ_TESTBENCHES))
 
 prog: $(BUILD_TMP)/$(PROJ).bin
 	$(ICEPROG) $<
