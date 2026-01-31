@@ -124,10 +124,12 @@ sudo-prog: $(BUILD_TMP)/$(PROJ).bin
 	sudo $(ICEPROG) $<
 
 dfuprog: $(BUILD_TMP)/$(PROJ).bin
-ifeq ($(DFU_SERIAL),)
-	$(DFU_UTIL) -e -a 0 -D $<
-else
+ifneq ($(DFU_SERIAL),)
 	$(DFU_UTIL) -e -S $(DFU_SERIAL) -a 0 -D $<
+else ifneq ($(DFU_IDS),)
+	$(DFU_UTIL) -e -d $(DFU_IDS) -a 0 -D $<
+else
+	$(DFU_UTIL) -e -a 0 -D $<
 endif
 
 clean:
